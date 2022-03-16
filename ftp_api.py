@@ -2,6 +2,7 @@
 
 from flask import Flask, request
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from json import dumps
 import shutil
 import string
@@ -11,6 +12,7 @@ import re
 import os
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 user_file = "/etc/proftpd/ftpd.passwd" # path to ftpasswd file
 ftpdata_dir = "/var/ftpdata" # data directory for the user homes
@@ -174,4 +176,4 @@ api.add_resource(status, '/')
 
 if __name__ == "__main__":
     startup()
-    app.run(port='5000')
+    app.run(host='0.0.0.0',port='5000')
